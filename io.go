@@ -1,4 +1,4 @@
-package io
+package main
 
 import (
 	"fmt"
@@ -8,13 +8,14 @@ import (
 	"os"
 )
 
-// CopyFile 复制文件
-// @Author Hex575A
-// @Description function Description
-// @Date 16:15 2022/8/29
-// @Param dstName 源文件绝对路径
-// @Param srcName 目标文件绝对路径
-// @return err 失败返回错误，成功无返回值。
+/*CopyFile
+ * @Author Hex575A
+ * @Description 将文件复制到另一个目录下
+ * @Date 8:53 2022/8/30
+ * @Param dstName 源文件绝对路径
+ * @Param srcName 目标文件绝对路径
+ * @return err 失败返回错误，成功无返回值。
+ */
 func CopyFile(dstName, srcName string) (err error) {
 	file, err := os.Open(dstName)
 	filepath, err := os.Create(srcName)
@@ -37,12 +38,13 @@ func CopyFile(dstName, srcName string) (err error) {
 	return nil
 }
 
-// PathExists 存在返回true
-// @Author Hex575A
-// @Description 判断目录或文件是否存在
-// @Date 16:13 2022/8/29
-// @Param path 目录路径
-// @return 存在返回true 不存在返回false
+/*PathExists
+ * @Author Hex575A
+ * @Description 判断目录或文件是否存在
+ * @Date 8:51 2022/8/30
+ * @Param path string 目录路径
+ * @return bool 存在返回true 不存在返回false
+ */
 func PathExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -54,13 +56,14 @@ func PathExists(path string) bool {
 	return false
 }
 
-// CreatePath
-// @Author Hex575A
-// @Description 自动创建目录，创建成功返回true 否返回false
-// @Date 16:11 2022/8/29
-// @Param path 目录路径
-// @Param FileMode 创建文件的权限
-// @return bool 创建成功返回true 失败返回false
+/*CreatePath
+ * @Author Hex575A
+ * @Description 自动创建目录，创建成功返回true 否返回false
+ * @Date 16:11 2022/8/29
+ * @Param path 目录路径
+ * @Param FileMode 创建文件的权限
+ * @return bool 创建成功返回true 失败返回false
+ */
 func CreatePath(path string, FileMode fs.FileMode) bool {
 	if !PathExists(path) {
 		err := os.Mkdir(path, FileMode)
