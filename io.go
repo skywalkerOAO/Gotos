@@ -16,7 +16,7 @@ import (
  * @Param srcName 目标文件绝对路径
  * @return err 失败返回错误，成功无返回值。
  */
-func CopyFile(dstName, srcName string) (err error) {
+func CopyFile(dstName, srcName string) error {
 	file, err := os.Open(dstName)
 	filepath, err := os.Create(srcName)
 	if err != nil {
@@ -90,7 +90,10 @@ func CreatePath(path string, FileMode fs.FileMode) bool {
  */
 func ReceiveFile(r *http.Request, TargetPath string, FileGroup string, ValueTag string) map[int]map[string]interface{} {
 	//设置内存缓冲区大小
-	r.ParseMultipartForm(2048 << 20)
+	err := r.ParseMultipartForm(256 << 20)
+	if err != nil {
+		return nil
+	}
 	if len(r.MultipartForm.Value) != 0 {
 		//获取上传的文件组，值为前端formdata.append的组名
 		files := r.MultipartForm.File[FileGroup]
