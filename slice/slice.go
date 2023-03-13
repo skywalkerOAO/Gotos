@@ -42,13 +42,13 @@ func Chunk(arr []interface{}, length int) [][]interface{} {
  * @Author Hex575A
  * @Description lodash _.compact
  * @Date 16:22 2023/3/9
- * @Param
- * @return
+ * @Param1 slice []interface{}
+ * @return slice []interface{}
  */
 func Compact(arr []interface{}) []interface{} {
 	s := make([]interface{}, 0)
 	for _, v := range arr {
-		if v != nil && v != 0 && v != "" {
+		if v != nil && v != 0 && v != "" && v != false {
 			s = append(s, v)
 		}
 	}
@@ -59,8 +59,9 @@ func Compact(arr []interface{}) []interface{} {
  * @Author Hex575A
  * @Description lodash _.concat
  * @Date 16:22 2023/3/9
- * @Param
- * @return
+ * @Param1 slice []interface{}
+ * @Param2 value []interface{}
+ * @return slice []interface{}
  */
 func Concat(arr []interface{}, value interface{}) []interface{} {
 	return append(arr, value)
@@ -70,8 +71,9 @@ func Concat(arr []interface{}, value interface{}) []interface{} {
  * @Author Hex575A
  * @Description lodash _.difference
  * @Date 16:41 2023/3/9
- * @Param
- * @return
+ * @Param1 slice []interface{}
+ * @Param2 value []interface{}
+ * @return slice []interface{}
  */
 func Difference(arr []interface{}, value []interface{}) []interface{} {
 
@@ -97,9 +99,9 @@ func Difference(arr []interface{}, value []interface{}) []interface{} {
 /*Drop
  * @Author Hex575A
  * @Description lodash _.drop
- * @Date 17:04 2023/3/9
- * @Param
- * @return
+ * @Param slice []interface{}
+ * @Param value int
+ * @return slice []interface{}
  */
 func Drop(arr []interface{}, args ...int) []interface{} {
 	var value = 1
@@ -115,6 +117,33 @@ func Drop(arr []interface{}, args ...int) []interface{} {
 		return arr
 	}
 	for i := value; i < arrLength; i++ {
+		s = append(s, arr[i])
+	}
+	return s
+}
+
+/*DropRight
+ * @Author Hex575A
+ * @Description lodash _.dropRight
+ * @Date 8:57 2023/3/10
+ * @Param slice []interface{}
+ * @Param value int
+ * @return slice []interface{}
+ */
+func DropRight(arr []interface{}, args ...int) []interface{} {
+	var value = 1
+	var arrLength = len(arr)
+	if len(args) != 0 {
+		value = args[0]
+	}
+	s := make([]interface{}, 0)
+	if value >= arrLength {
+		return s
+	}
+	if value <= 0 {
+		return arr
+	}
+	for i := 0; i < arrLength-value; i++ {
 		s = append(s, arr[i])
 	}
 	return s
